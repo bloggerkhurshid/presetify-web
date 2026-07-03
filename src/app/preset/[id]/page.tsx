@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Metadata } from 'next';
 
 const fetchPreset = async (id: string) => {
@@ -86,9 +87,12 @@ export default async function PresetPage({ params }: { params: Promise<{ id: str
         {/* Image Preview */}
         <div className="w-full relative aspect-[3/4] overflow-hidden bg-gray-100 shadow-2xl shadow-black/10">
           {preset.thumbnail_path ? (
-            <img
+            <Image
               src={`https://api.devkayy.in/${preset.thumbnail_path}`}
               alt={`${title} - Free Lightroom Preset Preview`}
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover w-full h-full"
             />
           ) : (
@@ -229,9 +233,11 @@ async function RecommendedSection({ currentId }: { currentId: string }) {
             <Link href={`/preset/${preset.id}`} key={preset.id} className="group flex flex-col">
               <div className="relative aspect-[3/4] w-full overflow-hidden bg-gray-100 mb-3 border border-gray-200/50 shadow-sm transition-all duration-500 group-hover:shadow-xl group-hover:shadow-black/5">
                 {preset.thumbnail_path ? (
-                  <img
+                  <Image
                     src={`https://api.devkayy.in/${preset.thumbnail_path}`}
                     alt={preset.title || 'Preset'}
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
                   />
                 ) : (
