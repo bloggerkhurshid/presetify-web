@@ -79,7 +79,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ [
 
 
       {/* Presets Grid */}
-      <section id="presets" className="container mx-auto px-4 py-16 max-w-7xl min-h-[80vh]">
+      <section id="presets" className="container mx-auto px-4 pt-6 pb-16 max-w-7xl min-h-[80vh]">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6">
             <div>
               <h2 className="text-3xl font-bold tracking-tight mb-2 text-black dark:text-white transition-colors">Latest Presets</h2>

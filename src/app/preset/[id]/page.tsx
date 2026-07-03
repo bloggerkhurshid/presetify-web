@@ -73,7 +73,7 @@ export default async function PresetPage({ params }: { params: Promise<{ id: str
   const category = preset.category_name || 'Photography';
 
   return (
-    <div className="container mx-auto px-4 py-12 max-w-7xl">
+    <div className="container mx-auto px-4 pt-4 pb-12 max-w-7xl">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-sm text-gray-400 dark:text-zinc-500 mb-10 transition-colors">
         <Link href="/" className="hover:text-black dark:hover:text-white transition-colors">Home</Link>
