@@ -31,6 +31,27 @@ const fetchCategories = async () => {
   }
 };
 
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }): Promise<Metadata> {
+  const resolvedParams = await searchParams;
+  const categoryName = typeof resolvedParams.category === 'string' ? resolvedParams.category : '';
+  
+  if (categoryName) {
+    // Decode if needed, but usually it's fine. Capitalize first letter.
+    const cleanName = categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
+    return {
+      title: `${cleanName} Lightroom Presets | .DNG by Khurshid`,
+      description: `Download free, premium ${cleanName} Lightroom DNG presets by Khurshid. Elevate your photography with perfectly tuned ${cleanName} presets.`,
+    };
+  }
+
+  return {
+    title: ".DNG | Free Lightroom Presets by Khurshid",
+    description: "Download free, premium Lightroom DNG presets by Khurshid. Professional photography presets for mobile and desktop.",
+  };
+}
+
 export default async function Home({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
   const resolvedParams = await searchParams;
   const q = typeof resolvedParams.q === 'string' ? resolvedParams.q.toLowerCase() : '';
