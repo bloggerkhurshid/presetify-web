@@ -34,14 +34,21 @@ const fetchCategories = async () => {
 export default async function Home({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
   const resolvedParams = await searchParams;
   const q = typeof resolvedParams.q === 'string' ? resolvedParams.q.toLowerCase() : '';
-  const categoryId = typeof resolvedParams.category === 'string' ? resolvedParams.category : '';
+  const categoryName = typeof resolvedParams.category === 'string' ? resolvedParams.category : '';
   const pageStr = typeof resolvedParams.page === 'string' ? resolvedParams.page : '1';
   const page = parseInt(pageStr, 10) || 1;
 
-  const [presetsResponse, categories] = await Promise.all([
-    fetchPresets(page, q, categoryId),
-    fetchCategories(),
-  ]);
+  const categories = await fetchCategories();
+  
+  let categoryId = '';
+  if (categoryName) {
+    const found = categories.find((c: any) => c.name.toLowerCase() === categoryName.toLowerCase());
+    if (found) {
+      categoryId = found.id.toString();
+    }
+  }
+
+  const presetsResponse = await fetchPresets(page, q, categoryId);
 
   const filteredPresets = presetsResponse.data;
   const pagination = presetsResponse.pagination;
@@ -95,7 +102,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ [
                     
                     const params = new URLSearchParams();
                     if (q) params.set('q', q);
-                    if (categoryId) params.set('category', categoryId);
+                    if (categoryName) params.set('category', categoryName);
                     params.set('page', pageNum.toString());
 
                     return (

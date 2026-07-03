@@ -31,8 +31,8 @@ export default function SearchFilters({ categories }: { categories: any[] }) {
 
   const handleCategoryClick = (categoryId: string) => {
     const params = new URLSearchParams(searchParams.toString());
-    if (currentCategory === categoryId) {
-      params.delete('category'); // Toggle off
+    if (currentCategory === categoryId || !categoryId) {
+      params.delete('category');
     } else {
       params.set('category', categoryId);
     }
@@ -72,9 +72,9 @@ export default function SearchFilters({ categories }: { categories: any[] }) {
           {categories.map((cat) => (
             <button
               key={cat.id}
-              onClick={() => handleCategoryClick(cat.id.toString())}
+              onClick={() => handleCategoryClick(cat.name)}
               className={`whitespace-nowrap px-6 py-2 text-sm font-medium transition-colors ${
-                currentCategory === cat.id.toString() 
+                currentCategory === cat.name 
                   ? 'bg-black text-white' 
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               }`}
