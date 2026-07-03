@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Categories | Presetify',
-  description: 'Browse preset categories on Presetify.',
+  title: 'Categories | .DNG',
+  description: 'Browse preset categories on .DNG.',
 };
 
 const fetchCategories = async () => {

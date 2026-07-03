@@ -122,6 +122,69 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ [
             </div>
           )}
       </section>
+
+      {/* Combined How It Works */}
+      <section className="border-t border-gray-100 bg-white">
+        <div className="container mx-auto px-4 py-20 max-w-7xl">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-3">How It Works</h2>
+            <p className="text-gray-500 max-w-xl mx-auto">From browsing to applying — get a professional edit in minutes, right on your phone.</p>
+          </div>
+
+          {/* Top row — 3 general steps */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            {[
+              { step: "01", title: "Browse & Pick", desc: "Filter by category to find the exact mood and style you're after." },
+              { step: "02", title: "Download Free DNG", desc: "Tap download to save the DNG preset file. No sign-up or account required." },
+              { step: "03", title: "Apply in Lightroom", desc: "Import the DNG into Lightroom, create a preset from it, and apply to your photos." },
+            ].map((item) => (
+              <div key={item.step} className="border border-gray-100 p-6">
+                <span className="text-4xl font-black text-gray-100 block mb-3">{item.step}</span>
+                <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Divider with label */}
+          <div className="flex items-center gap-4 mb-10">
+            <div className="flex-1 h-px bg-gray-100" />
+            <span className="text-xs font-bold tracking-widest text-gray-400 uppercase">Lightroom Mobile Steps</span>
+            <div className="flex-1 h-px bg-gray-100" />
+          </div>
+
+          {/* Bottom row — 4 LR icon steps */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-0 relative">
+            <div className="hidden md:block absolute top-8 left-[12.5%] right-[12.5%] h-px bg-gray-200 z-0" />
+            {[
+              {
+                icon: <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>,
+                step: "01", title: "Download",
+              },
+              {
+                icon: <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>,
+                step: "02", title: "Import to LR",
+              },
+              {
+                icon: <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"/></svg>,
+                step: "03", title: "Create Preset",
+              },
+              {
+                icon: <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>,
+                step: "04", title: "Apply & Done",
+              },
+            ].map((item) => (
+              <div key={item.step} className="flex flex-col items-center text-center px-4 py-6 relative z-10">
+                <div className="w-14 h-14 bg-white border-2 border-gray-200 flex items-center justify-center mb-3 text-gray-700">
+                  {item.icon}
+                </div>
+                <span className="text-xs font-bold text-gray-400 tracking-widest mb-1">{item.step}</span>
+                <h3 className="font-bold text-gray-900 text-sm">{item.title}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

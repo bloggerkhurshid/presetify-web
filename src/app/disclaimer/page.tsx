@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Disclaimer | Presetify',
-  description: 'Disclaimer for Presetify.',
+  title: 'Disclaimer | .DNG',
+  description: 'Disclaimer for .DNG.',
 };
 
 export default function Disclaimer() {

@@ -13,6 +13,17 @@ const fetchPreset = async (id: string) => {
   }
 };
 
+const fetchRandomPresets = async (excludeId: string) => {
+  try {
+    const res = await fetch(`https://api.devkayy.in/api/list_wallpapers.php?sort=random&limit=8`, { cache: 'no-store' });
+    if (!res.ok) return [];
+    const json = await res.json();
+    return (json.data || []).filter((p: any) => p.id?.toString() !== excludeId);
+  } catch (error) {
+    return [];
+  }
+};
+
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
   const preset = await fetchPreset(resolvedParams.id);
@@ -22,7 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const category = preset.category_name || 'Photography';
 
   return {
-    title: `Download ${title} - Free Lightroom DNG Preset | Presetify`,
+    title: `Download ${title} - Free Lightroom DNG Preset | .DNG`,
     description: `Download the ${title} Lightroom preset for free. A professional ${category} DNG preset for Adobe Lightroom mobile & desktop. Achieve a stunning, cohesive look with one tap.`,
     keywords: [
       title,
@@ -152,56 +163,99 @@ export default async function PresetPage({ params }: { params: Promise<{ id: str
         </div>
       </div>
 
-      {/* SEO Rich Content Block */}
-      <section className="mt-20 border-t border-gray-100 pt-16">
+      {/* Refined About & Why Section */}
+      <section className="mt-16 border-t border-gray-100 pt-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+
+          {/* About */}
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">About the {title} Preset</h2>
-            <p className="text-gray-600 leading-relaxed mb-4">
-              The <strong>{title}</strong> preset is part of Presetify's curated collection of free Lightroom
-              presets for {category.toLowerCase()} photography. Each preset is handcrafted to enhance the
-              mood, tone, and color grading of your photos without over-editing.
+            <span className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-3 block">About This Preset</span>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">The {title} Preset</h2>
+            <p className="text-gray-500 leading-relaxed mb-6">
+              A free, handcrafted Lightroom DNG preset from .DNG's {category} collection.
+              Designed to enhance mood, tone, and color grading with a single tap — without over-editing.
+              Works beautifully across golden hour, indoor portraits, and street photography.
             </p>
-            <p className="text-gray-600 leading-relaxed">
-              This {category.toLowerCase()} preset is ideal for photographers looking for a consistent
-              editing style that works across different lighting conditions — from golden hour shots to 
-              indoor portraits and urban street photography.
-            </p>
+            <div className="flex flex-wrap gap-2">
+              {[category, 'Free', 'DNG Format', 'Mobile & Desktop', 'No Sign-up'].map(tag => (
+                <span key={tag} className="text-xs font-semibold border border-gray-200 text-gray-500 px-3 py-1">
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
+
+          {/* Why Use */}
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Why Use Lightroom Presets?</h2>
-            <ul className="space-y-3 text-gray-600">
-              <li className="flex gap-3">
-                <span className="font-bold text-black">01.</span>
-                <span><strong>Save Time:</strong> Apply a consistent look to hundreds of photos in seconds, instead of editing each one manually.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="font-bold text-black">02.</span>
-                <span><strong>Consistency:</strong> Maintain a professional, cohesive feed for your Instagram, blog, or portfolio.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="font-bold text-black">03.</span>
-                <span><strong>Learn Editing:</strong> Studying how a preset adjusts exposure, tone curves, and HSL helps you understand photo editing.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="font-bold text-black">04.</span>
-                <span><strong>Fully Adjustable:</strong> Every preset is a starting point — tweak the settings to perfectly match your photo's lighting.</span>
-              </li>
+            <span className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-3 block">Why Use Presets</span>
+            <h2 className="text-2xl font-bold text-gray-900 mb-5">Benefits at a Glance</h2>
+            <ul className="space-y-3">
+              {[
+                { n: '01', label: 'Save Time', text: 'One tap applies a full editing style to any photo.' },
+                { n: '02', label: 'Stay Consistent', text: 'Keep a cohesive look across your entire feed or portfolio.' },
+                { n: '03', label: 'Learn Editing', text: 'See exactly how tone curves, HSL, and exposure are adjusted.' },
+                { n: '04', label: 'Fully Flexible', text: 'Tweak any setting after applying — it\'s just a starting point.' },
+              ].map(item => (
+                <li key={item.n} className="flex items-start gap-3 border-b border-gray-50 pb-3 last:border-0">
+                  <span className="text-xs font-black text-gray-300 w-6 pt-0.5 flex-shrink-0">{item.n}</span>
+                  <div>
+                    <span className="font-semibold text-gray-900 text-sm">{item.label} — </span>
+                    <span className="text-gray-500 text-sm">{item.text}</span>
+                  </div>
+                </li>
+              ))}
             </ul>
           </div>
+
         </div>
       </section>
 
-      {/* Bottom CTA */}
-      <section className="mt-16 bg-gray-950 text-white p-12 text-center">
-        <h2 className="text-3xl font-bold mb-3">Explore More Free Presets</h2>
-        <p className="text-gray-400 mb-8 max-w-xl mx-auto">
-          Browse our full collection of free Lightroom DNG presets for every mood, style, and genre of photography.
-        </p>
-        <Link href="/" className="inline-flex items-center justify-center bg-white text-black px-8 py-3 font-semibold hover:bg-gray-100 transition-colors">
-          Browse All Presets &rarr;
-        </Link>
-      </section>
+      {/* Recommended Presets */}
+      <RecommendedSection currentId={resolvedParams.id} />
     </div>
+  );
+}
+
+async function RecommendedSection({ currentId }: { currentId: string }) {
+  const presets = await fetchRandomPresets(currentId);
+  if (!presets.length) return null;
+
+  return (
+    <section className="border-t border-gray-100 mt-12">
+      <div className="container mx-auto px-4 py-16 max-w-7xl">
+        <h2 className="text-2xl font-bold text-gray-900 mb-8">You May Also Like</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          {presets.slice(0, 8).map((preset: any) => (
+            <Link href={`/preset/${preset.id}`} key={preset.id} className="group flex flex-col">
+              <div className="relative aspect-[3/4] w-full overflow-hidden bg-gray-100 mb-3 border border-gray-200/50 shadow-sm transition-all duration-500 group-hover:shadow-xl group-hover:shadow-black/5">
+                {preset.thumbnail_path ? (
+                  <img
+                    src={`https://api.devkayy.in/${preset.thumbnail_path}`}
+                    alt={preset.title || 'Preset'}
+                    className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-gray-300">No Image</div>
+                )}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+              </div>
+              <h3 className="font-semibold text-sm text-gray-900 px-1">{preset.title || 'Untitled Preset'}</h3>
+              <p className="text-xs text-gray-400 px-1">{preset.category_name || 'Uncategorized'}</p>
+            </Link>
+          ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-12 bg-gray-950 text-white p-10 text-center">
+          <h2 className="text-2xl font-bold mb-2">Explore All Free Presets</h2>
+          <p className="text-gray-400 mb-6 max-w-lg mx-auto text-sm">
+            Browse our full collection of free Lightroom DNG presets for every mood, style, and genre.
+          </p>
+          <Link href="/" className="inline-flex items-center justify-center bg-white text-black px-8 py-3 font-semibold hover:bg-gray-100 transition-colors">
+            Browse All Presets &rarr;
+          </Link>
+        </div>
+      </div>
+    </section>
   );
 }

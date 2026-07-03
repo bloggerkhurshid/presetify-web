@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Contact Us | Presetify',
-  description: 'Get in touch with Presetify.',
+  title: 'Contact Us | .DNG',
+  description: 'Get in touch with .DNG.',
 };
 
 export default function Contact() {

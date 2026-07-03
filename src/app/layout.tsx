@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Presetify | Premium Photography Presets",
-  description: "Download the best minimal and premium presets for your photography.",
+  title: ".DNG | Free Lightroom Presets by Khurshid",
+  description: "Download free, premium Lightroom DNG presets by Khurshid. Professional photography presets for mobile and desktop.",
 };
 
 export default function RootLayout({

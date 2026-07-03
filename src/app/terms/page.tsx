@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | Presetify',
-  description: 'Terms of Service for Presetify.',
+  title: 'Terms of Service | .DNG',
+  description: 'Terms of Service for .DNG.',
 };
 
 export default function TermsOfService() {
@@ -19,12 +19,12 @@ export default function TermsOfService() {
 
         <h2 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">2. License & Usage</h2>
         <p className="mb-4">
-          The presets provided on Presetify are for personal and commercial use in your own photography. You may not resell, redistribute, or package these presets as your own products.
+          The presets provided on .DNG are for personal and commercial use in your own photography. You may not resell, redistribute, or package these presets as your own products.
         </p>
 
         <h2 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">3. Intellectual Property</h2>
         <p className="mb-4">
-          All content, features, and functionality on Presetify (including but not limited to text, graphics, logos, and digital downloads) are owned by Presetify and are protected by international copyright and intellectual property laws.
+          All content, features, and functionality on .DNG (including but not limited to text, graphics, logos, and digital downloads) are owned by Presetify and are protected by international copyright and intellectual property laws.
         </p>
 
         <h2 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">4. Limitation of Liability</h2>

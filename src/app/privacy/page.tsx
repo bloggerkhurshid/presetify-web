@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Presetify',
-  description: 'Privacy Policy for Presetify.',
+  title: 'Privacy Policy | .DNG',
+  description: 'Privacy Policy for .DNG.',
 };
 
 export default function PrivacyPolicy() {
