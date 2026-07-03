@@ -51,7 +51,7 @@ export default function SearchFilters({ categories }: { categories: any[] }) {
           placeholder="Search presets by name..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full pl-12 pr-4 py-3 border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+          className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-zinc-800 bg-white dark:bg-[#0a0a0a] text-black dark:text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent transition-all"
         />
       </div>
 
@@ -62,8 +62,8 @@ export default function SearchFilters({ categories }: { categories: any[] }) {
             onClick={() => handleCategoryClick('')}
             className={`whitespace-nowrap px-6 py-2 text-sm font-medium transition-colors ${
               !currentCategory 
-                ? 'bg-black text-white' 
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                ? 'bg-black text-white dark:bg-white dark:text-black' 
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:border dark:border-zinc-800'
             }`}
           >
             All Presets
@@ -75,8 +75,8 @@ export default function SearchFilters({ categories }: { categories: any[] }) {
               onClick={() => handleCategoryClick(cat.name)}
               className={`whitespace-nowrap px-6 py-2 text-sm font-medium transition-colors ${
                 currentCategory === cat.name 
-                  ? 'bg-black text-white' 
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  ? 'bg-black text-white dark:bg-white dark:text-black' 
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:border dark:border-zinc-800'
               }`}
             >
               {cat.name}
